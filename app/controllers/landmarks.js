@@ -15,6 +15,8 @@ const Landmarks = {
     landmark: {
         handler: function(request, h) {
             const data = request.payload;
+            var contributorEmail = request.auth.credentials.id;
+            data.contributor = this.users[contributorEmail];
             this.landmarks.push(data);
             return h.redirect('/report');
         }

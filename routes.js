@@ -11,6 +11,8 @@ module.exports = [
     { method: 'GET', path: '/logout', config: Accounts.logout },
     { method: 'POST', path: '/signup', config: Accounts.signup },
     { method: 'POST', path: '/login', config: Accounts.login },
+    { method: 'GET', path: '/settings', config: Accounts.showSettings },
+    { method: 'POST', path: '/settings', config: Accounts.updateSettings },
 
     { method: 'GET', path: '/home', config: Landmarks.home },
     { method: 'GET', path: '/report', config: Landmarks.report },
@@ -25,7 +27,8 @@ module.exports = [
             directory: {
                 path: './public'
             }
-        }
+        },
+        options: { auth: false }
     }
 
 ];

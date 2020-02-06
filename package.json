@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/jmccannbarrow/poi#readme",
   "dependencies": {
+    "@hapi/cookie": "^11.0.0",
+    "@hapi/hapi": "^19.1.0",
+    "@hapi/inert": "^6.0.1",
+    "@hapi/vision": "^6.0.0",
+    "dotenv": "^8.2.0",
     "handlebars": "^4.7.3",
     "hapi": "^18.1.0",
     "inert": "^5.1.3",
