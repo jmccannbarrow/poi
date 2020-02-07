@@ -8,6 +8,8 @@ const server = Hapi.server({
     host: 'localhost'
 });
 
+require('./app/models/db');
+
 async function init() {
     await server.register(require('@hapi/inert'));
     await server.register(require('@hapi/vision'));
@@ -49,10 +51,5 @@ process.on('unhandledRejection', err => {
     process.exit(1);
 });
 
-server.bind({
-    users: {},
-    landmarks: [],
-
-});
 
 init();

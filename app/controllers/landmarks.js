@@ -1,3 +1,8 @@
+'use strict';
+
+const Landmark = require('../models/landmark');
+const User = require('../models/user');
+
 const Landmarks = {
     home: {
         handler: function(request, h) {
@@ -5,19 +10,26 @@ const Landmarks = {
         }
     },
     report: {
-        handler: function(request, h) {
+        handler: async function(request, h) {
+            const landmarks = await Landmark.find().populate('contributor').lean();
             return h.view('report', {
                 title: 'Landmarks to Date',
-                landmarks: this.landmarks
+                landmarks:landmarks
             });
         }
     },
     landmark: {
-        handler: function(request, h) {
+        handler: async function(request, h) {
+            const id = request.auth.credentials.id;
+            const user = await User.findById(id);
             const data = request.payload;
-            var contributorEmail = request.auth.credentials.id;
-            data.contributor = this.users[contributorEmail];
-            this.landmarks.push(data);
+            const newLandmark = new Landmark({
+                name: data.name,
+                description: data.description,
+                category: data.category,
+                contributor:user._id
+            });
+            await newLandmark.save();
             return h.redirect('/report');
         }
     }
