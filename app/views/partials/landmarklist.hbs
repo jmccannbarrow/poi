@@ -1,16 +1,16 @@
 <section class="ui raised segment">
+    <h3 class="ui header">Famous Irish Landmarks</h3>
     <div class="ui grid">
-        <aside class="six wide column">
-            <img src="images/causeway.jpg" class="ui medium image">
-        </aside>
-        <article class="eight wide column">
+
+        <article class="eighteen wide column">
             <table class="ui celled table segment">
                 <thead>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Category</th>
-                    <th>Contributor</th>
+                    <th>File</th>
+                    <th>User</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -19,7 +19,15 @@
                         <td> {{name}} </td>
                         <td> {{description}} </td>
                         <td> {{category}} </td>
+                        <td> {{file}} </td>
                         <td> {{contributor.firstName}} {{contributor.lastName}} </td>
+                        <td><div class="ui item"><a href="/landmark/deleteLandmark/{{_id}}" class="ui icon button"><i class="icon trash"></i>
+                        </a>
+                        </td>
+                        <td><div class="ui item"><a href="/landmarksettings/updateLandmarkSettings/" class="ui icon button"><i class="edit icon"></i>
+                        </a>
+                        </td>
+
                     </tr>
                 {{/each}}
                 </tbody>
@@ -27,3 +35,4 @@
         </article>
     </div>
 </section>
+
