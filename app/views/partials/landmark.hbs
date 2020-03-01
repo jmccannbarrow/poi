@@ -2,7 +2,7 @@
     <div class="ui grid ">
         <div class="ui ten wide column">
             <div class="ui stacked fluid form segment">
-                <form action="/landmark" method="POST" >
+                <form action="/landmark" method="POST"  >
                     <h3 class="ui header">Create your Landmark</h3>
 
                     <div class="six wide field">
@@ -36,32 +36,27 @@
                     <div></div>
                     <div></div>
 
-                    <div class="field six wide">
-                        <label>File</label>
-                        <div class="ui action input">
-                            <input type="text" readonly>
-                            <input type="file" name="file" style="display: none!important;" />
-                            <div class="ui icon button">
-                                <i class="cloud upload alternate icon"></i>
-                            </div>
+
+
+
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-horizontal-text">Select Image</label>
+                        <div class="uk-form-controls">
+                            <input type="file" class="uk-input" name="imagefile" accept="image/png, image/jpeg">
                         </div>
                     </div>
 
-                    <button class="ui blue submit button">Submit</button>
-                </form>
             </div>
 
+            <div class="field six wide">
+
+            </div>
         </div>
+
+        <button class="ui blue submit button">Submit</button>
+        </form>
+    </div>
+
+    </div>
 </section>
-
-<script>
-    $('input:text, .ui.button', '.ui.action.input').on('click', function (e) {
-        $('input:file', $(e.target).parents()).click();
-    });
-
-    $('input:file', '.ui.action.input').on('change', function (e) {
-        var name = e.target.files[0].name;
-        $('input:text', $(e.target).parent()).val(name);
-    });
-</script>
 

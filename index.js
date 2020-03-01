@@ -1,7 +1,15 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+
+const server = Hapi.server({
+    port: 3000,
+    host: 'localhost'
+});
+
 const dotenv = require('dotenv');
+
+
 
 const result = dotenv.config();
 if (result.error) {
@@ -9,10 +17,7 @@ if (result.error) {
     process.exit(1);
 }
 
-const server = Hapi.server({
-    port: 3000,
-    host: 'localhost'
-});
+
 
 require('./app/models/db');
 
@@ -20,6 +25,8 @@ async function init() {
     await server.register(require('@hapi/inert'));
     await server.register(require('@hapi/vision'));
     await server.register(require('@hapi/cookie'));
+
+    server.validator(require('@hapi/joi'))
 
     server.auth.strategy('session', 'cookie', {
         cookie: {
