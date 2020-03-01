@@ -1,4 +1,4 @@
-{{> mainmenu _id="settings" }}
+{{> mainmenu _id="usersettings" }}
 
 <section class="ui raised segment">
     <div class="ui grid">
@@ -21,7 +21,7 @@
                         <label>Password</label> <input value="{{user.password}}" type="password" name="password">
                     </div>
                     <div class="two fields">
-                    <button class="ui blue submit button">Save</button><div></div>
+                        <button class="ui blue submit button">Save</button><div></div>
                 </form>
                 <form action="/settings/deleteUser" method="POST">
                     <button class="ui blue submit button">Delete</button></a>
