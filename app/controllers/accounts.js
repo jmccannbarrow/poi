@@ -120,8 +120,11 @@ const Accounts = {
     showSettings: {
         handler: async function(request, h) {
             try {
-                const id = request.auth.credentials.id;
-                const user = await User.findById(id).lean();
+                const userid = request.params.id;
+                console.log(userid);
+                //const id = request.auth.credentials.id;
+                const user = await User.findById(userid).lean();
+                //console.log(user.name);
                 return h.view('settings', { title: 'User Settings', user: user });
             } catch (err) {
                 return h.view('login', { errors: [{ message: err.message }] });
@@ -277,88 +280,6 @@ const Accounts = {
     },
 
 
-    showEdituser: {
-        handler: async function(request, h) {
-            console.log ("I'm here")
-            try {
-
-
-
-                //const id = request.auth.credentials.id;
-                //const landmarks = await User.find({id: id}).lean();
-
-                const id = request.auth.credentials.id;
-                const user = await User.findById(id).lean();
-                return h.view('usersettings', { title: 'User Settings', id: id });
-            } catch (err) {
-                return h.view('manageusers', { errors: [{ message: err.message }] });
-            }
-        }
-    },
-    edituser: {
-        validate: {
-            payload: {
-                firstName: Joi.string().required(),
-                lastName: Joi.string().required(),
-                email: Joi.string()
-                    .email()
-                    .required(),
-                password: Joi.string().required()
-            },
-            options: {
-                abortEarly: false
-            },
-            failAction: function(request, h, error) {
-                return h
-                    .view('usersettings', {
-                        title: 'Sign up error',
-                        errors: error.details
-                    })
-                    .takeover()
-                    .code(400);
-            }
-        },
-        handler: async function(request, h) {
-            try {
-                const userEdit = request.payload;
-                const id = request.auth.credentials.id;
-                const user = await User.findById(id);
-                user.firstName = userEdit.firstName;
-                user.lastName = userEdit.lastName;
-                user.email = userEdit.email;
-                user.password = userEdit.password;
-                await user.save();
-                return h.redirect('/usersettings');
-            } catch (err) {
-                return h.view('main', { errors: [{ message: err.message }] });
-            }
-        }
-    },
-
-
-
-
-    listofusers: {
-        auth: false,
-        handler: function(request, h) {
-            return h.view('manageusers', { title: 'This is a list of users' });
-        }
-    },
-
-    //adminlandingtest: {
-    //    handler: function(request, h) {
-
-    //        return h.redirect('/report2');
-    //    }
-    //},
-
-    adminlandingtest: {
-        auth: false,
-        handler: function(request, h) {
-            return h.view('manageusers', { title: 'This is admin landing' });
-        }
-    },
-
 
     manageusers: {
         handler: async function(request, h) {
@@ -371,21 +292,6 @@ const Accounts = {
         }
     },
 
-
-    deleteUser: {
-        handler: async function(request, h) {
-            try {
-                console.log("In delete user")
-                const userDelete = request.payload;
-                const id = request.auth.credentials.id;
-                const user = await User.findBy(id).lean();
-                await user.remove();
-                return h.redirect('/');
-            } catch (err) {
-                return h.view('main', { errors: [{ message: err.message }] });
-            }
-        }
-    },
 
 
 

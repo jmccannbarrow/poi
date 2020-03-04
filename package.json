@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jmccannbarrow/poi#readme",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
     "@hapi/boom": "^9.0.0",
     "@hapi/cookie": "^11.0.0",
     "@hapi/hapi": "^19.1.0",
@@ -28,6 +29,7 @@
     "express": "^4.17.1",
     "express-edge": "^2.0.1",
     "express-fileupload": "^1.1.6",
+    "formidable": "^1.2.2",
     "fs": "0.0.1-security",
     "handlebars": "^4.7.3",
     "hapi": "^18.1.0",
