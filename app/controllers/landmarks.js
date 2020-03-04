@@ -1,10 +1,11 @@
 'use strict';
 
-const cloudinary = require('cloudinary');
 const Landmark = require('../models/landmark');
 const User = require('../models/user');
-const ImageStore = require('../utils/image-store');
 const Joi = require('@hapi/joi');
+var fs = require('fs');
+const util = require('util');
+const ImageStore = require('../utils/image-store');
 
 
 
@@ -31,72 +32,42 @@ const Landmarks = {
     },
     landmark: {
         handler: async function(request, h) {
-            const id = request.auth.credentials.id;
-            const data = request.payload;
-            const name = data.name;
-            const filename = data.imagefile;
-            const file = "C:\\landmarkimages\\" + filename;
+            console.log("landmark");
+
+             const landmarkname = request.payload.name;
+            console.log(landmarkname);
+            const filename = request.payload.photo;
+            console.log(filename);
+
+
+
+            const file = request.payload.photo.files;
             console.log(file);
+            console.log(Object.keys(file).length);
 
-            console.log("Before Upload");
 
-           // const file = request.payload.imagefile;
-            //const serverPath = "http://res.cloudinary.com/dzpmc2rgn/image/upload/v1582667617/";
-            //const serverPath = "test"
-            //const fileURL = serverPath + filename + ".jpg";
+            if (Object.keys(file).length > 0) {
+                await ImageStore.uploadImage(file, landmarkname);};
 
-           // if (Object.keys(file).length > 0) {
-                await ImageStore.uploadImage(file, name);
 
-                console.log("After Upload");
+
+               const id = request.auth.credentials.id;
+            const user = await User.findById(id);
+            const data = request.payload;
+
 
                 const newLandmark = new Landmark({
                     name: data.name,
                     description: data.description,
                     category: data.category,
                     userid: id,
-                    //imageURL: fileURL
+
                 });
                 await newLandmark.save();
                 return h.redirect('/report');
-            //}
+
         }
     },
-
-    // editlandmark: {
-    //handler: async function(request, h) {
-    //const id = request.auth.credentials.id;
-    //const data = request.payload;
-
-    //const filename = data.name;
-    //const serverPath = "http://res.cloudinary.com/dzpmc2rgn/image/upload/v1582667617/";
-    //const fileURL = serverPath + filename + ".jpg";
-
-//pass request and filename to uploadfile
-
-    //const file = request.payload.imagefile;
-    //const filename = request.payload.name;
-
-    //if (Object.keys(file).length > 0) {
-    //await ImageStore.uploadImage(request.payload.imagefile, filename);
-    //return h.redirect('/');
-    //}
-
-
-
-    //const newLandmark = new Landmark({
-    // name: data.name,
-    //description: data.description,
-    // category: data.category,
-
-    //  userid: id
-    // });
-    // await newLandmark.save();
-    //return h.redirect('/report');
-    // }
-//filefileURL,
-
-    //},
 
 
     payload: {
@@ -107,16 +78,28 @@ const Landmarks = {
     },
 
 
+
     showLandmarkSettings: {
+
+
         handler: async function(request, h) {
-            try{
-                //const landmarkid= request.auth.credentials.id;
+            try {
+
                 const landmarkid = request.params.id;
-                const landmarksettings = await Landmark.findById({landmarkid: landmarkid})
-                console.log("h")
-                return h.view('landmarksettings', { title: 'Landmark Settings', landmarksettings : landmarksettings });
+                console.log(landmarkid);
+
+                const landmark = await Landmark.findById(landmarkid).lean();
+
+                console.log("before landmark._id");
+
+                console.log(landmark._id);
+
+                console.log("after landmark._id");
+
+
+                return h.view('editlandmark', {title: 'Edit Landmark', landmark: landmark});
             } catch (err) {
-                return h.view('/', { errors: [{ message: err.message }] });
+                return h.view('/', {errors: [{message: err.message}]});
             }
         }
     },
@@ -124,22 +107,31 @@ const Landmarks = {
 
 
 
-    updateLandmarkSettings: {
+
+
+
+    updateLandmark: {
         handler: async function(request, h) {
             try {
-                const landmarkEdit = request.payload;
+
+                console.log("in updatelandmark");
+
+                const landmarkedit = request.payload;
+
+                console.log(landmarkedit.name);
+                console.log(landmarkedit.description);
+
                 const landmarkid = request.params.id;
-                console.log("I'm here")
-                //const landmark = await Landmark.findById(id)
-                const landmark = await Landmark.findById(landmarkid)
-                console.log("I get to here")
-                //const landmark = await Landmark.findById(id)
-                //const landmark = await Landmark.findById(id);
-                landmark.name = landmarkEdit.name;
-                landmark.description = landmarkEdit.description;
-                landmark.category = landmarkEdit.category;
+                console.log(landmarkid);
+
+
+                console.log("here");
+
+                const landmark  = await Landmark.findById(landmarkid);
+                landmark.name = landmarkedit.name;
+                landmark.description = landmarkedit.description;
+
                 await landmark.save();
-                console.log("end")
                 return h.redirect('/report');
             } catch (err) {
                 return h.view('main', { errors: [{ message: err.message }] });
@@ -161,17 +153,24 @@ const Landmarks = {
     },
 
     deleteLandmark: {
-        handler: async function(request, h) {
+        handler: async function (request, h) {
             try {
-                const landmarkDelete = request.payload;
-                const id = request.auth.credentials.id;
-                const landmark = await Landmark.findByIdAndRemove(id).lean();
+
+                const landmarkid = request.params.id
+                console.log(landmarkid)
+
+                const landmark  = await Landmark.findById(landmarkid)
+                console.log(landmarkid)
+                //const deleteLandmark  = await Landmark.findByIdAndRemove(landmarkid);
                 await landmark.remove();
-                return h.redirect('/');
+                //console.log(deleteLandmark)
+
+                return h.redirect('/report');
             } catch (err) {
                 return h.view('main', { errors: [{ message: err.message }] });
             }
         }
+
     },
 
 };
