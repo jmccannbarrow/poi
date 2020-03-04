@@ -4,7 +4,7 @@
     <div class="ui grid">
         <div class="ui ten wide column">
             <div class="ui stacked fluid form segment">
-                <form action="/settings" method="POST">
+                <form action="/settings/{{user._id}}" method="POST">
                     <h3 class="ui header">Register</h3>
                     <div class="two fields">
                         <div class="field">
@@ -23,9 +23,7 @@
                     <div class="two fields">
                     <button class="ui blue submit button">Save</button><div></div>
                 </form>
-                <form action="/settings/deleteUser" method="POST">
-                    <button class="ui blue submit button">Delete</button></a>
-                </form>
+
                 {{> error }}
             </div>
         </div>
