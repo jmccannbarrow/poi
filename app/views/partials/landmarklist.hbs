@@ -8,9 +8,6 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Category</th>
-                    <th>File</th>
-                    <th>User</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -18,13 +15,11 @@
                     <tr>
                         <td> {{name}} </td>
                         <td> {{description}} </td>
-                        <td> {{category}} </td>
-                        <td> {{file}} </td>
-                        <td> {{contributor.firstName}} {{contributor.lastName}} </td>
-                        <td><div class="ui item"><a href="/landmark/deleteLandmark/{{_id}}" class="ui icon button"><i class="icon trash"></i>
+
+                        <td><div class="ui item"><a href="/landmark/deleteLandmark/{{id}}" class="ui icon button"><i class="icon trash"></i>
                         </a>
                         </td>
-                        <td><div class="ui item"><a href="/landmarksettings/updateLandmarkSettings/" class="ui icon button"><i class="edit icon"></i>
+                        <td><div class="ui item"><a href="/landmark/showLandmarkSettings/{{id}}" class="ui icon button"><i class="edit icon"></i>
                         </a>
                         </td>
 
