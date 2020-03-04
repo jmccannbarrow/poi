@@ -17,13 +17,13 @@
                     <tr>
                         <td> {{firstName}} </td>
                         <td> {{lastName}} </td>
-                        <td><div class="ui item"><a href="/manageusers/deleteUser/{{_id}}" class="ui icon button"><i class="icon trash"></i>
+                        <td><div class="ui item"><a href="/accounts/deleteUser/{{_id}}" class="ui icon button"><i class="icon trash"></i>
                         </a>
                         </td>
-                        <td><div class="ui item"><a href="/usersettings/showEdituser/" class="ui icon button"><i class="edit icon"></i>
+                        <td><div class="ui item"><a href="/settings/showSettings/{{_id}}" class="ui icon button"><i class="edit icon"></i>
                         </a>
                         </td>
-                        <i class="github icon"></i> <a href="/settings"> {{firstName}}  {{lastName}} </a>
+
                     </tr>
                 {{/each}}
                 </tbody>
