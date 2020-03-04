@@ -13,7 +13,7 @@ module.exports = [
     { method: 'POST', path: '/signup', config: Accounts.signup },
     { method: 'POST', path: '/login', config: Accounts.login },
     { method: 'GET', path: '/settings/showSettings/{id}', config: Accounts.showSettings },
-    { method: 'POST', path: '/settings', config: Accounts.updateSettings },
+    { method: 'POST', path: '/settings/{id}', config: Accounts.updateSettings },
 
 
 
@@ -25,6 +25,8 @@ module.exports = [
 
     { method: 'GET', path: '/createuser', config: Accounts.showCreateuser },
     { method: 'POST', path: '/createuser', config: Accounts.createuser },
+    { method: 'GET', path: '/accounts/deleteUser/{id}', config: Accounts.deleteUser },
+
 
 
     { method: 'GET', path: '/home', config: Landmarks.home },
@@ -39,11 +41,10 @@ module.exports = [
     { method: 'GET', path: '/manageusers',  config: Accounts.manageusers },
 
 
-    { method: 'GET', path: '/landmark/showLandmarkSettings/{id}', config: Landmarks.showLandmarkSettings },
+   { method: 'GET', path: '/landmark/showLandmarkSettings/{id}', config: Landmarks.showLandmarkSettings },
     { method: 'POST', path: '/editlandmark/{id}', config: Landmarks.updateLandmark },
-
     { method: 'GET', path: '/landmark/deleteLandmark/{id}', config: Landmarks.deleteLandmark },
-    //{ method: 'POST', path: '/landmark/deleteLandmark', config: Landmarks.deleteLandmark },
+
 
     {
         method: 'GET',
