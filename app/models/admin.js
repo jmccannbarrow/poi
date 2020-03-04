@@ -21,6 +21,7 @@ adminSchema.methods.comparePassword = function(candidatePassword) {
         throw Boom.unauthorized('Password mismatch');
     }
     return this;
+   
 };
 
 module.exports = Mongoose.model('Admin', adminSchema);
