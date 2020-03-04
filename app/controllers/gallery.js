@@ -26,7 +26,8 @@ const Gallery = {
                 if (Object.keys(file).length > 0) {
                     await ImageStore.uploadImage(request.payload.imagefile, filename);
 
-                    return h.redirect('/');
+                    
+                   return h.redirect('/');
                 }
                 return h.view('gallery', {
                     title: 'Cloudinary Gallery',
