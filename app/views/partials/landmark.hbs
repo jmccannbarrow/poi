@@ -1,8 +1,8 @@
 <section class="ui raised segment">
     <div class="ui grid ">
-        <div class="ui ten wide column">
+        <div class="ui sixteen wide column">
             <div class="ui stacked fluid form segment">
-                <form action="/landmark" method="POST"  >
+                <form action="/landmark" method="POST" enctype="multipart/form-data">
                     <h3 class="ui header">Create your Landmark</h3>
 
                     <div class="six wide field">
@@ -13,47 +13,16 @@
                         <label>Description</label>
 
                         <textarea placeholder="Description" type="text" name="description"></textarea></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+
                     <div class="field">
-                        <div class="field">
-                            <div class="ui dropdown" name="category">
-                                <input type="hidden" name="category">
-                                <div class="text">Select Category</div>
-                                <i class="ui dropdown icon"></i>
-                                <div class="menu">
-                                    <div class="item">Lake</div>
-                                    <div class="item">Park</div>
-                                    <div class="item">Monument</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+                        <label>Image Upload</label>
+                        <input type="file" class="form-control" accept="image/png, image/jpeg" id="fieldPhoto" name="photo"></div>
 
 
 
 
-                    <div class="uk-margin">
-                        <label class="uk-form-label" for="form-horizontal-text">Select Image</label>
-                        <div class="uk-form-controls">
-                            <input type="file" class="uk-input" name="imagefile" accept="image/png, image/jpeg">
-                        </div>
-                    </div>
+                    <input type="submit" value="Upload" class="uk-button uk-button-default">
 
-            </div>
-
-            <div class="field six wide">
-
-            </div>
-        </div>
-
-        <button class="ui blue submit button">Submit</button>
         </form>
     </div>
 
