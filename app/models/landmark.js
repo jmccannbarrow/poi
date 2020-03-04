@@ -12,21 +12,22 @@ const landmarkSchema = new Schema({
     category: String,
     userid: String,
 
-    imageURL: String
 
 });
 
+
 landmarkSchema.statics.findById = function(id) {
-    return this.findOne({ id : id});
+    return this.findOne({ _id : id});
 
-    landmarkSchema.statics.findByName = function(name) {
-        return this.findOne({ name: name });
-    };
+    //landmarkSchema.statics.find = function(landmarkid) {
+      //  return this.findOne({ _id : landmarkid});
+   /// };
 
-    landmarkSchema.statics.findByIdAndRemove = function (id) {
-        return this.findOne({id : id});
 
-    }
+    //landmarkSchema.statics.findByIdAndRemove = function (id) {
+        //return this.findOne({id : id});
+
+    //}
 
 };
 
