@@ -20,24 +20,18 @@ const ImageStore = {
         return result.resources;
     },
 
-    uploadImage: async function(file, name) {
+    uploadImage: async function(imagefile, filename) {
 
+        console.log("IN UploadImage");
+        console.log(imagefile);
 
-       // console.log("Length in UploadImage" + imagefile.length);
-      //  console.log("Filename in UploadImage" + filename);
+        await writeFile('./public/temp.img', imagefile);
+        await cloudinary.v2.uploader.upload('./public/temp.img',
 
-      //  await writeFile('./public/images/TEMP.IMG', imagefile);
-console.log(file);
-console.log(name);
-        console.log("in UploadImage and before upload file");
-        await cloudinary.v2.uploader.upload("http://www.kerrycoco.ie/wp-content/uploads/2017/08/chambers.jpg",
-            { public_id: "test"},
+            { public_id: filename},
             function(error, result) {console.log(result, error); }
 
         );
-
-        console.log("in UploadImage and after upload");
-
     },
 
 
