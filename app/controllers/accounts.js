@@ -12,8 +12,7 @@ const Accounts = {
         handler: function(request, h) {
             return h.view('main', { title: 'Welcome to Famous Irish Landmarks' });
         },
-
-
+//Register a User
     },
     showSignup: {
         auth: false,
@@ -67,6 +66,12 @@ const Accounts = {
             }
         }
     },
+
+
+
+//User Login
+
+
     showLogin: {
         auth: false,
         handler: function(request, h) {
@@ -117,6 +122,65 @@ const Accounts = {
             return h.redirect('/');
         }
     },
+
+    //Register an Admin
+
+    showsignupadmin: {
+        auth: false,
+        handler: function(request, h) {
+            return h.view('signupadmin', { title: 'Sign up for Famous Irish Landmarks' });
+        }
+    },
+
+    signupadmin: {
+        auth: false,
+        validate: {
+            payload: {
+                firstName: Joi.string().required(),
+                lastName: Joi.string().required(),
+                email: Joi.string()
+                    .email()
+                    .required(),
+                password: Joi.string().required()
+            },
+            options: {
+                abortEarly: false
+            },
+            failAction: function(request, h, error) {
+                return h
+                    .view('signup', {
+                        title: 'Sign up error',
+                        errors: error.details
+                    })
+                    .takeover()
+                    .code(400);
+            }
+        },
+        handler: async function(request, h) {
+            try {
+                const payload = request.payload;
+                let admin = await Admin.findByEmail(payload.email);
+                if (admin) {
+                    const message = 'Email address is already registered';
+                    throw Boom.badData(message);
+                }
+                const newAdmin = new Admin({
+                    firstName: payload.firstName,
+                    lastName: payload.lastName,
+                    email: payload.email,
+                    password: payload.password
+                });
+                admin = await newAdmin.save();
+                request.cookieAuth.set({ id: admin.id });
+                return h.redirect('/manageusers');
+            } catch (err) {
+                return h.view('signupadmin', { errors: [{ message: err.message }] });
+            }
+        }
+    },
+
+//Show User Settings
+
     showSettings: {
         handler: async function(request, h) {
             try {
@@ -130,6 +194,9 @@ const Accounts = {
             }
         }
     },
+
+    //Update User Settings
+
     updateSettings: {
         validate: {
             payload: {
@@ -156,11 +223,8 @@ const Accounts = {
         handler: async function(request, h) {
             try {
                 const userEdit = request.payload;
-               // console.log(userEdit);
                 const userid = request.params.id;
-               // console.log(userid);
                 const user = await User.findById(userid);
-                console.log(user)
                 user.firstName = userEdit.firstName;
                 user.lastName = userEdit.lastName;
                 user.email = userEdit.email;
@@ -174,6 +238,8 @@ const Accounts = {
     },
 
 
+    //Delete a User
+
     deleteUser: {
         handler: async function (request, h) {
             try {
@@ -181,21 +247,23 @@ const Accounts = {
                 const userid = request.params.id;
                 const landmarks = await Landmark.find({userid: userid}).lean();
 
-                //IF LANDMARKS dont EXIST FOR USER THEN delete user
+                //If Landmarks dont exist for user then delete user
                 if (landmarks.length == 0) {
                     console.log("Length = 0");
                     const user = await User.findById(userid);
                     await user.remove();
 
                 }
-                //Else quit and advise  advise user to delete landmarks
+                //else quit and advise user to delete landmarks
+
                 else {
-                    console.log("Length <> 0");
 
                     const message = 'Landmarks exists for this user. Delete landmarks before deleting the user.';
                     throw Boom.unauthorized(message);
 
                 }
+
+
 
                 return h.redirect('/manageusers');
 
@@ -204,6 +272,7 @@ const Accounts = {
                 return h.view('main', {errors: [{message: err.message}]});
             }
         }
+
 
     },
 
@@ -217,6 +286,9 @@ const Accounts = {
             return h.view('loginadmin', { title: 'Login to Famous Irish Landmarks' });
         }
     },
+
+    //Administrator Login
+
     loginadmin: {
         auth: false,
         validate: {
@@ -261,6 +333,8 @@ const Accounts = {
             return h.redirect('/');
         }
     },
+
+    //Admin function to create user
 
     showCreateuser: {
         auth: false,
@@ -317,12 +391,11 @@ const Accounts = {
         }
     },
 
-
+//Bring back list of all users on admin screen
 
     manageusers: {
         handler: async function(request, h) {
             const users = await User.find().populate('contributor').lean();
-            //const userid =  await User.find().request.params.id;
             return h.view('manageusers', {
                title: 'Users to Date',
                 users:users
