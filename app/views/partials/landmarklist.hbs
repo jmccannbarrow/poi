@@ -7,14 +7,21 @@
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
+                    <th>Details</th>
+                    <th>Delete</th>
+                    <th>Update</th>
                 </tr>
                 </thead>
                 <tbody>
                 {{#each landmarks}}
                     <tr>
                         <td> {{name}} </td>
-                        <td> {{description}} </td>
+
+
+                        <td><div class="ui item"><a href="/landmark/viewLandmarkDetails/{{_id}}" class="ui icon button"><i class="file alternate outline icon"></i>
+                        </a>
+                        </td>
+
 
 
                         <td><div class="ui item"><a href="/landmark/deleteLandmark/{{_id}}" class="ui icon button"><i class="icon trash"></i>
@@ -31,4 +38,6 @@
         </article>
     </div>
 </section>
+
+
 
