@@ -1,0 +1,36 @@
+{{> mainmenu _id="viewlandmarkdetails"}}
+<section class="ui raised segment">
+    <div class="ui grid ">
+        <div class="ui sixteen wide column">
+            <div class="ui stacked fluid form segment">
+                <form action="" method="POST" >
+                    <h3 class="ui header">View Landmark Details</h3>
+
+                    <div class="field">
+
+                        <h4>Name</h4>
+                        <p>{{landmark.name}}</p>
+                    <div class="field">
+                        <h4>Description</h4>
+                        <p>{{landmark.description}}</p>
+                    <div></div>
+                        <div class="field">
+
+                        <img src="{{landmark.imageURL}}" alt="No Image" width="542" height="262">
+
+                    <div></div>
+                    <div></div>
+                    <div></div>
+
+
+
+
+                            <a href="/report"button class="ui blue submit button">Close</a>
+
+
+                </form>
+            </div>
+
+        </div>
+</section>
+
