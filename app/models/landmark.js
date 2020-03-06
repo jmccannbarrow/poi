@@ -11,7 +11,7 @@ const landmarkSchema = new Schema({
     description: String,
     category: String,
     userid: String,
-
+    imageURL: String,
 
 });
 
@@ -19,23 +19,8 @@ const landmarkSchema = new Schema({
 landmarkSchema.statics.findById = function(id) {
     return this.findOne({ _id : id});
 
-    //landmarkSchema.statics.find = function(landmarkid) {
-      //  return this.findOne({ _id : landmarkid});
-   /// };
-
-
-    //landmarkSchema.statics.findByIdAndRemove = function (id) {
-        //return this.findOne({id : id});
-
-    //}
 
 };
-
-
-
-
-
-
 
 
 
