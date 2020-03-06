@@ -1,28 +1,33 @@
-{{> mainmenu _id="editlandmark"}}
+{{> mainmenu _id="viewlandmarkdetails"}}
 <section class="ui raised segment">
     <div class="ui grid ">
         <div class="ui ten wide column">
             <div class="ui stacked fluid form segment">
-                <form action="/editlandmark/{{landmark._id}}" method="POST" >
-                    <h3 class="ui header">Manage your Landmark</h3>
+                <form action="" method="POST" >
+                    <h3 class="ui header">View Landmark Details</h3>
 
-                    <div class="six wide field">
-
-                        <label>Name</label>
-                        <input value="{{landmark.name}}" type="text" name="name">
                     <div class="field">
-                        <label>Description</label>
 
-                        <input value="{{landmark.description}}" type="text" name="description">
+                        <h4>Name</h4>
+                        <p>{{landmark.name}}</p>
+                    <div class="field">
+                        <h4>Description</h4>
+                        <p>{{landmark.description}}</p>
+                    <div></div>
+                        <div class="field">
+
+                        <img src="{{landmark.imageURL}}" alt="No Image" width="800" height="800">
+
                     <div></div>
                     <div></div>
                     <div></div>
-                    <div></div>
 
 
 
 
-                    <button class="ui blue submit button">Submit</button>
+                            <a href="/report"button class="ui blue submit button">Close</a>
+
+
                 </form>
             </div>
 

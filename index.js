@@ -1,6 +1,7 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const ImageStore = require('./app/utils/image-store');
 
 const server = Hapi.server({
     port: 3000,
@@ -17,7 +18,11 @@ if (result.error) {
     process.exit(1);
 }
 
-
+const credentials = {
+    cloud_name: process.env.name,
+    api_key: process.env.key,
+    api_secret: process.env.secret
+};
 
 require('./app/models/db');
 
@@ -25,6 +30,8 @@ async function init() {
     await server.register(require('@hapi/inert'));
     await server.register(require('@hapi/vision'));
     await server.register(require('@hapi/cookie'));
+
+    ImageStore.configure(credentials);
 
     server.validator(require('@hapi/joi'))
 

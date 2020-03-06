@@ -19,7 +19,7 @@ userSchema.statics.findByEmail = function(email) {
 
 
 userSchema.statics.findById = function(userid) {
-    return this.findOne({userid: userid});
+    return this.findOne({_id: userid});
 };
 
 userSchema.methods.comparePassword = function(candidatePassword) {

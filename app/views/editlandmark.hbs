@@ -3,10 +3,10 @@
     <div class="ui grid ">
         <div class="ui ten wide column">
             <div class="ui stacked fluid form segment">
-                <form action="/editlandmark/{{landmark._id}}" method="POST" >
+                <form action="/editlandmark/{{landmark._id}}" method="POST" enctype="multipart/form-data" >
                     <h3 class="ui header">Manage your Landmark</h3>
 
-                    <div class="six wide field">
+                    <div class="field">
 
                         <label>Name</label>
                         <input value="{{landmark.name}}" type="text" name="name">
@@ -16,13 +16,19 @@
                         <input value="{{landmark.description}}" type="text" name="description">
                     <div></div>
                     <div></div>
+
+                        <div class="field">
+                            <label>Image</label>
+                            <img src="{{landmark.imageURL}}" alt="No Image" width="800" height="800">
+
+
                     <div></div>
                     <div></div>
+                        <div class="field">
+                            <label>Image:</label>
+                            <input type="file" class="form-control" name="imagefile" accept="image/png, image/jpeg">
+                            <input type="submit" value="Upload" class="uk-button uk-button-default">
 
-
-
-
-                    <button class="ui blue submit button">Submit</button>
                 </form>
             </div>
 
