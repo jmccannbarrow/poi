@@ -20,18 +20,11 @@ const ImageStore = {
         return result.resources;
     },
 
-    uploadImage: async function(imagefile, filename) {
-
-        console.log("IN UploadImage");
-        console.log(imagefile);
-
+    uploadImage: async function(imagefile) {
         await writeFile('./public/temp.img', imagefile);
-        await cloudinary.v2.uploader.upload('./public/temp.img',
+        const result = await cloudinary.uploader.upload('./public/temp.img', {}, function(error, result) {console.log(result, error); });
 
-            { public_id: filename},
-            function(error, result) {console.log(result, error); }
-
-        );
+        return result.url;
     },
 
 
