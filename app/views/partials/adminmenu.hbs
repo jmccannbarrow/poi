@@ -1,23 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{title}}</title>
-    <meta charset="UTF-8">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.3/dist/semantic.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.3/dist/semantic.min.js"></script>
-</head>
-<body>
-<section class="ui container">
-    {{{content}}}
-</section>
+<nav class="ui inverted menu">
+    <header class="header item"><a href="/"> View </a></header>
+    <div class="right menu">
+        <a class="item" href="/logout"> Logout</a>
+
+    </div>
+</nav>
+
 <script>
-    $(document).ready(function () {
-        $('.ui.dropdown').dropdown({on: 'hover'});
-    });
-    $('.message .close').on('click', function () {
-        $(this).closest('.message').transition('fade');
-    });
+    $("#{{_id}}").addClass("active item");
 </script>
-</body>
-</html>
