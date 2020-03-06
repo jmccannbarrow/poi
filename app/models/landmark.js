@@ -25,3 +25,4 @@ landmarkSchema.statics.findById = function(id) {
 
 
 module.exports = Mongoose.model('Landmark', landmarkSchema);
+
