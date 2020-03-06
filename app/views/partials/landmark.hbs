@@ -2,30 +2,26 @@
     <div class="ui grid ">
         <div class="ui sixteen wide column">
             <div class="ui stacked fluid form segment">
-                <form action="/landmark" method="POST" enctype="multipart/form-data">
+                <form action="/landmark" method="POST" enctype="multipart/form-data"  >
                     <h3 class="ui header">Create your Landmark</h3>
 
-                    <div class="six wide field">
+                    <div class="sixteen wide field">
 
-                        <label>Name</label>
-                        <input placeholder="name" type="text" name="name"></div>
+                        <label>Name:</label>
+                        <input placeholder="name" type="text" name="name" required></div>
                     <div class="field">
-                        <label>Description</label>
+                        <label>Description:</label>
 
-                        <textarea placeholder="Description" type="text" name="description"></textarea></div>
+                        <textarea placeholder="Description" type="text" name="description" required></textarea></div>
 
                     <div class="field">
-                        <label>Image Upload</label>
-                        <input type="file" class="form-control" accept="image/png, image/jpeg" id="fieldPhoto" name="photo"></div>
+                        <label>Image:</label>
+                        <input type="file" class="form-control" name="imagefile" accept="image/png, image/jpeg"  >
+                        <input type="submit" value="Submit" class="uk-button uk-button-default">
 
+                </form>
+            </div>
 
-
-
-                    <input type="submit" value="Upload" class="uk-button uk-button-default">
-
-        </form>
-    </div>
-
-    </div>
+        </div>
 </section>
 
