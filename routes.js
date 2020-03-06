@@ -17,7 +17,8 @@ module.exports = [
 
 
 
-
+    { method: 'GET', path: '/signupadmin', config: Accounts.showsignupadmin },
+    { method: 'POST', path: '/signupadmin', config: Accounts.signupadmin },
     { method: 'GET', path: '/loginadmin', config: Accounts.showLoginAdmin },
     { method: 'GET', path: '/logoutadmin', config: Accounts.logoutadmin },
     { method: 'POST', path: '/loginadmin', config: Accounts.loginadmin},
@@ -34,13 +35,9 @@ module.exports = [
     { method: 'POST', path: '/landmark', config: Landmarks.landmark },
 
 
-
-
-
-
     { method: 'GET', path: '/manageusers',  config: Accounts.manageusers },
 
-
+    { method: 'GET', path: '/landmark/viewLandmarkDetails/{id}', config: Landmarks.viewLandmarkDetails },
    { method: 'GET', path: '/landmark/showLandmarkSettings/{id}', config: Landmarks.showLandmarkSettings },
     { method: 'POST', path: '/editlandmark/{id}', config: Landmarks.updateLandmark },
     { method: 'GET', path: '/landmark/deleteLandmark/{id}', config: Landmarks.deleteLandmark },
@@ -60,3 +57,4 @@ module.exports = [
 
 
 ];
+
