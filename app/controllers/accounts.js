@@ -185,9 +185,9 @@ const Accounts = {
         handler: async function(request, h) {
             try {
                 const userid = request.params.id;
-                console.log(userid);
+
                 const user = await User.findById(userid).lean();
-                console.log(user.email);
+                
                 return h.view('settings', { title: 'User Settings', user: user });
             } catch (err) {
                 return h.view('login', { errors: [{ message: err.message }] });
@@ -409,3 +409,4 @@ const Accounts = {
 };
 
 module.exports = Accounts;
+
