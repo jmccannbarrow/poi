@@ -4,7 +4,7 @@
             <div class="ui stacked fluid form segment">
                 <form action="/landmark" method="POST" enctype="multipart/form-data"  >
                     <h3 class="ui header">Create your Landmark</h3>
-
+                    <p>* Please ensure all fields are filled out to create landmark</p>
                     <div class="sixteen wide field">
 
                         <label>Name:</label>
@@ -14,14 +14,16 @@
 
                         <textarea placeholder="Description" type="text" name="description" required></textarea></div>
 
-                    <div class="field">
+                    <div class="required field">
                         <label>Image:</label>
                         <input type="file" class="form-control" name="imagefile" accept="image/png, image/jpeg"  >
                         <input type="submit" value="Submit" class="uk-button uk-button-default">
 
                 </form>
             </div>
-
+            {{> error }}
         </div>
 </section>
+
+
 
