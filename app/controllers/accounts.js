@@ -187,7 +187,7 @@ const Accounts = {
                 const userid = request.params.id;
 
                 const user = await User.findById(userid).lean();
-                
+
                 return h.view('settings', { title: 'User Settings', user: user });
             } catch (err) {
                 return h.view('login', { errors: [{ message: err.message }] });
@@ -249,7 +249,6 @@ const Accounts = {
 
                 //If Landmarks dont exist for user then delete user
                 if (landmarks.length == 0) {
-                    console.log("Length = 0");
                     const user = await User.findById(userid);
                     await user.remove();
 
@@ -409,4 +408,3 @@ const Accounts = {
 };
 
 module.exports = Accounts;
-
