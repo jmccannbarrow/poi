@@ -34,9 +34,11 @@ const Landmarks = {
     //Add a landmark
 
     landmark: {
+
+
         handler: async function(request, h) {
 
-            try {
+
                 const file = request.payload.imagefile;
 
                 if (Object.keys(file).length > 0) {
@@ -61,8 +63,11 @@ const Landmarks = {
                 }
 
 
-            } catch (err) {
-                console.log(err);
+             else {
+                    const id = request.auth.credentials.id;
+                    const user = await User.findById(id);
+
+                return h.redirect('/report');
             }
         },
         payload: {
@@ -114,7 +119,7 @@ const Landmarks = {
 
     updateLandmark: {
         handler: async function(request, h) {
-            try {
+
 
                 const landmarkedit = request.payload;
                 const landmarkid = request.params.id;
@@ -123,6 +128,8 @@ const Landmarks = {
 
                 if (Object.keys(file).length > 0) {
                     const url = await ImageStore.uploadImage(request.payload.imagefile);
+
+
 
                     const landmark = await Landmark.findById(landmarkid);
                     landmark.name = landmarkedit.name;
@@ -135,9 +142,12 @@ const Landmarks = {
                 }
 
 
-            } catch (err) {
-                return h.view('main', { errors: [{ message: err.message }] });
-            }
+                else {
+                    const id = request.auth.credentials.id;
+                    const user = await User.findById(id);
+
+                    return h.redirect('/report');
+                }
 
     },
     payload: {
@@ -149,15 +159,6 @@ const Landmarks = {
 
 },
 
-    poilist: {
-        handler: async function(request, h) {
-            const landmarks = await Landmark.find().populate('contributor').lean();
-            return h.view('poilist', {
-                title: 'Landmarks to Date',
-                landmarks:landmarks
-            });
-        }
-    },
 
     deleteLandmark: {
         handler: async function (request, h) {
